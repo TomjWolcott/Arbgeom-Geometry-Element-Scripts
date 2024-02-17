@@ -1,0 +1,95 @@
+World(
+    name: "Core",
+    description: "Loooong this description is biiiiig and takes up a lot up space and talks all about the world it is describing",
+    levels: [
+        Level(
+            name: "Spherical test",
+            description: "ABCD",
+            manifold:
+                // plane4D( normal: [0, 0, 0, 1] ),
+                // sphere4D( radius: Dynamic( id: "radius-", value: 30.0 ) ),
+                // shell( shape: box4D( size: Dynamic( id: "sizes", value: [30, 0, 30, 30] ) ), offset: 10),
+                // torisphere( r012: 30, r0123: 10 ),
+                // extrude( direction: [1, 0, 0, 0], shape: sphere4D( radius: 30 ) ),
+                // shell( offset: 5, shape: intersection(
+                //     shape1: shift(
+                //         shift: Dynamic(id: "shift", value: [0, 0, 0, 0]),
+                //         shape: invert(shape: sphere4D( radius: 20 )/*torisphere( r012: 30, r0123: 10 )*/)
+                //     ),
+                //     shape2: plane4D( normal: [0, 0, 0, 1] )
+                // )),
+                shell( offset: 20, shape: intersection(
+                    shape1: shift( shift: [0, 0, 0, 0], shape: box4D( size: [1000, 1000, 1000, 0] ) ),
+                    shape2: invert( shape: shift(
+                        shift: Dynamic( id: "wormshift-", value: [0, 0, 0, 0]),
+                        shape: extrude( direction: [0, 0, 0, 1], shape: sphere4D( radius: Dynamic(id: "worm_rad", value: 20) ) )
+                    ) )
+                )),
+                // shell( offset: 10, shape: intersection(
+                //     shape1: shift( shift: [0, 0, 950, 0], shape: box4D( size: [1000, 1000, 1000, 0] ) ),
+                //     shape2: invert( shape: shift(
+                //         shift: Dynamic( id: "wormshift-", value: [-50, 0, 0, 0]),
+                //         shape: shell( offset: 20, shape: box4D( size: [20, 0, 20, 1000] ) )
+                //     ) )
+                // )),
+                // shell( offset: 10, shape: intersection(
+                //     shape1: plane4D( normal: [0, 0, 0, 1] ),
+                //     shape2: invert( shape: reorient(
+                //         inv_orientation: [[1,0,0,0], [0,0,0,1], [0,0,1,0], [0,1,0,0]],
+                //         shape: spheritorus( r01: 40, r0123: 20 )
+                //     ) )
+                // ) ),
+            spawn_pose: Pose(position: [40, 5, 0, 40]),
+            geometries: [
+                Geometry(
+                    pose: Pose(position: [-29, 10, 0, 10]),
+                    shape: sphere4D(radius: 3.0),
+                    material: "basic",
+                    color: "pink",
+                    is_dynamic: true
+                ),
+                // Geometry(
+                //     pose: Pose(position: [0, 40, -930, 0]),
+                //     shape: intersection(
+                //         shape1: plane4D( normal: [0, 0, 0, 1] ),
+                //         shape2: invert( shape: box4D( size: [50, 40, 1000, 1000] ) )
+                //     ),
+                //     material: "basic"
+                // ),
+                // Geometry(
+                //     pose: Pose(position: [0, 0, 0, 0]),
+                //     shape: invert( shape: box4D( size: [1000, 60, 50, 50] ) ),
+                //     material: "basic"
+                // ),
+                Geometry(
+                    pose: Pose(position: [0, 0, 0, 100]),
+                    shape: box4D(size: [70, 0.5, 100, 100]),
+                    material: "basic",
+                    color: "gray"
+                ),
+                Geometry(
+                    pose: Pose(position: [0, 0, 0, -100]),
+                    shape: box4D(size: [70, 0.5, 100, 100]),
+                    material: "basic",
+                    color: "purple"
+                ),
+                // Geometry(
+                //     pose: Pose(position: [0, -10, 0, 74]),
+                //     shape: box4D(size: [100, 0.5, 100, 100]),
+                //     material: "basic"
+                // ),
+                // Geometry(
+                //     pose: Pose(position: [0, 10, 0, -74]),
+                //     shape: box4D(size: [100, 0.5, 100, 100]),
+                //     material: "basic"
+                // ),
+                // Geometry(
+                //     pose: Pose(position: [0, 0, 100, 0]),
+                //     shape: box4D(size: [0.5, 100, 100, 100]),
+                //     material: "basic",
+                //     color: "orange"
+                // )
+            ]
+        )
+    ]
+)

@@ -1,0 +1,132 @@
+World(
+    name: "Playground",
+    description: "A place where I dump levels that seem interesting",
+    level_access: true,
+    levels: [
+        Level(
+            name: "Flat planes",
+            description: "Just a flat plane in the surface of a flat plane",
+            manifold: plane4D( normal: [0, 0, 0, 1] ),
+            spawn_pose: Pose( position: [0, 5, 0, 0] ),
+            geometries: [
+                Geometry(
+                    pose: Pose( position: [0, 0, 0, 0] ),
+                    shape: plane4D( normal: [0, 1, 0, 0] ),
+                    material: "basic"
+                )
+            ]
+        ),
+        Level(
+            name: "Rounded Hypercube",
+            description: "ABCD",
+            manifold: shell( shape: box4D( size: [20, 20, 20, 20] ), offset: 10),
+            spawn_pose: Pose(position: [40, 5, 0, 0]),
+            geometries: [
+                Geometry(
+                    pose: Pose(position: [-45, 10, 0, 0]),
+                    shape: sphere4D(radius: 5.0),
+                    material: "basic",
+                    color: "pink",
+                    is_dynamic: true
+                ),
+                Geometry(
+                    pose: Pose(position: [1, 0, 0, 0]),
+                    shape: box4D(size: [100, 0.5, 100, 100]),
+                    material: "basic",
+                    // grid_ori: [[1,0,1,1], [0,1,0,0], [1,0,-1,1], [1,0,0,-1]],
+                )
+            ]
+        ),
+        Level(
+            name: "Spherical test",
+            description: "ABCD",
+            manifold:
+                shell( offset: 20, shape: intersection(
+                    shape1: shell( offset: 0, shape: plane4D( normal: [0, .5, 0, .866] ) ),
+                    shape2: invert( shape: shift(
+                        shift: Dynamic( id: "wormshift-", value: [0, 0, 0, 0]),
+                        shape: extrude( direction: [0, .5, 0, .866], shape: sphere4D( radius: Dynamic(id: "worm_rad", value: 20) ) )
+                    ) )
+                )),
+            spawn_pose: Pose(position: [40, 30, 0, -40]),
+            geometries: [
+                Geometry(
+                    pose: Pose(position: [-29, 10, 0, 10]),
+                    shape: sphere4D(radius: 3.0),
+                    material: "basic",
+                    color: "pink",
+                    is_dynamic: true
+                ),
+                Geometry(
+                    pose: Pose(position: [0, 40.01, 0, 86.69], plane: "yw", angle_deg: 30),
+                    shape: box4D(size: [100, 0.5, 100, 100]),
+                    material: "basic",
+                ),
+                Geometry(
+                    pose: Pose(position: [0, -60.01, 0, -86.69], plane: "yw", angle_deg: 30),
+                    shape: box4D(size: [100, 0.5, 100, 100]),
+                    material: "basic",
+                    color: [100, 140, 140]
+                ),
+                Geometry(
+                    pose: Pose(position: [0, 0, 0, 0], plane: "yw", angle_deg: 30),
+                    shape: box4D(size: [0.5, 40, 20, 40]),
+                    material: "basic",
+                    color: [120, 180, 100]
+                ),
+            ]
+        ),
+        Level(
+            name: "Rounded Hypercube hollow",
+            description: "ABCD",
+            manifold: shell(offset: 10, shape: intersection(
+                shape1: box4D( size: [20, 20, 20, 20] ),
+                shape2: invert( shape: extrude( direction: [0, 0, 0, 1], shape: sphere4D( radius: 20 ) ) ),
+            ) ),
+            spawn_pose: Pose(position: [40, 5, 0, 0]),
+            geometries: [
+                Geometry(
+                    pose: Pose(position: [-45, 10, 0, 0]),
+                    shape: sphere4D(radius: 5.0),
+                    material: "basic",
+                    color: "pink",
+                    is_dynamic: true
+                ),
+                Geometry(
+                    pose: Pose(position: [0, 0, 0, 0], plane: "yz", angle_deg: 30),
+                    shape: box4D(size: [100, 0.5, 100, 100]),
+                    material: "basic",
+                    // grid_ori: [[1,0,1,1], [0,1,0,0], [1,0,-1,1], [1,0,0,-1]],
+                ),
+            ]
+        ),
+        Level(
+            name: "Black hole",
+            description: "ABCD",
+            manifold:
+                shell( offset: 20, shape: intersection(
+                    shape1: plane4D( normal: [0, 1, 0, 0] ),
+                    shape2: invert( shape: shift(
+                        shift: Dynamic( id: "wormshift-", value: [0, 0, 0, 0]),
+                        shape: extrude( direction: [0, 1, 0, 0], shape: sphere4D( radius: Dynamic(id: "worm_rad", value: 30) ) )
+                    ) )
+                )),
+            spawn_pose: Pose(position: [100, 20, 2, 0]),
+            geometries: [
+                Geometry(
+                    pose: Pose(position: [0, 0, 0, 0]),
+                    shape: box4D(size: [100, 100, 0.1, 100]),
+                    material: "basic",
+                    // grid_ori: [[1,0,1,1], [0,1,0,0], [1,0,-1,1], [1,0,0,-1]],
+                ),
+                Geometry(
+                    pose: Pose(position: [0, 0, 60, 0]),
+                    shape: box4D(size: [100, 0.1, 100, 100]),
+                    material: "basic",
+                    color: "red"
+                    // grid_ori: [[1,0,1,1], [0,1,0,0], [1,0,-1,1], [1,0,0,-1]],
+                ),
+            ]
+        )
+    ]
+)
